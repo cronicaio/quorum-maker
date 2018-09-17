@@ -1,1 +1,1 @@
-dockerImage=vareger/quorum-maker:latest
+dockerImage=cronicaio/quorum-maker:latest
