@@ -7,14 +7,15 @@ GLOBAL_ARGS="--raft --nodiscover --networkid $NETID --raftjoinexisting $RAFTID  
 echo "[*] Starting Constellation node" > qdata/constellationLogs/constellation_${NODENAME}.log
 
 constellation-node \
---url=http://$CURRENT_NODE_IP:$C_PORT/ \
+--url=https://$CURRENT_NODE_IP:$C_PORT/ \
 --port=$C_PORT \
 --workdir=qdata \
 --socket=$NODENAME.ipc \
 --publickeys=/home/node/keys/$NODENAME.pub \
 --privatekeys=/home/node/keys/$NODENAME.key \
---tls=off \
---othernodes=http://$MASTER_IP:$MC_PORT/ >> qdata/constellationLogs/constellation_${NODENAME}.log 2>&1 &
+--tlsservertrust=insecure-no-validation \
+--tlsclienttrust=insecure-no-validation \
+--othernodes=https://$MASTER_IP:$MC_PORT/ >> qdata/constellationLogs/constellation_${NODENAME}.log 2>&1 &
 
 # Fix to wait till ipc file get generated
 while : ; do
